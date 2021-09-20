@@ -1,0 +1,57 @@
+body {
+  background-color: #f6f8fa;
+}
+.root {
+  margin-top: 4%;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.exam {
+  background-color: white;
+  box-shadow: 0px 0px 11px 2px rgba(194, 194, 194, 1);
+  &__title {
+    background-color: #292929;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    h4 {
+      color: white;
+    }
+  }
+  &__description {
+    border-bottom: 2px solid #e9ebed;
+  }
+  &__question {
+    padding-top: 7px;
+    padding-bottom: 5px;
+  }
+  &__options {
+    background-color: #f4f5f9;
+
+    .option {
+      border-bottom: 2px solid #e2ebf3;
+    }
+    .option:first-child {
+      border-top: 2px solid #e2ebf3;
+    }
+  }
+  &__buttons {
+    padding: 10px 0px 10px 0px;
+    .timer {
+      margin-top: 1%;
+      font-size: large;
+    }
+  }
+}
+.feedback {
+  padding-top: 1%;
+  background-color: #f9f9f9;
+}

@@ -1,0 +1,253 @@
+[{
+  "_id": {
+    "$oid": "6010146ccf36944122caf45b"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:09:00.285Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60101499d9582841efe50144"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:09:37.847Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "601014b539650242439115e3"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:10:10.930Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60101511032bbb43117d969e"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:11:41.183Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60101629eab66d4434084582"
+  },
+  "creationDate": {
+    "$date": "2021-01-26T13:15:47.213Z"
+  },
+  "name": "Algebra",
+  "code": "MAT101",
+  "department": {
+    "name": "CSE",
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e93b"
+    }
+  },
+  "varsity": {
+    "name": "SUST",
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e931"
+    }
+  },
+  "mcqExams": [],
+  "cqExams": [],
+  "__v": 1,
+  "students": [
+    {
+      "_id": {
+        "$oid": "6015855a946f0c778c691c60"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "60158e6e5e798487dd0d985f"
+  },
+  "creationDate": {
+    "$date": "2021-01-30T16:43:28.590Z"
+  },
+  "name": "C Programming",
+  "code": "SWE123",
+  "department": {
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e93a"
+    },
+    "name": "SWE"
+  },
+  "varsity": {
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e931"
+    },
+    "name": "SUST"
+  },
+  "createdBy": {
+    "$oid": "6015b154a411b8ce8c103c23"
+  },
+  "mcqExams": [
+    {
+      "_id": {
+        "$oid": "6015ba8d5fb74ddde0a42ad5"
+      },
+      "examId": {
+        "$oid": "6015ba8d5fb74ddde0a42ad1"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6020aa8797970069088f5fe2"
+      },
+      "examId": {
+        "$oid": "6020aa8797970069088f5fe0"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6020ad9a97970069088f5ff2"
+      },
+      "examId": {
+        "$oid": "6020ad9a97970069088f5fef"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6020ae8897970069088f5ffb"
+      },
+      "examId": {
+        "$oid": "6020ae8897970069088f5ff9"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6020af5c97970069088f600b"
+      },
+      "examId": {
+        "$oid": "6020af5c97970069088f6008"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6020afc297970069088f6014"
+      },
+      "examId": {
+        "$oid": "6020afc297970069088f6012"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6020b03a97970069088f601d"
+      },
+      "examId": {
+        "$oid": "6020b03a97970069088f601b"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60214412c3d85719040ea72a"
+      },
+      "examId": {
+        "$oid": "60214412c3d85719040ea726"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "6021448cc3d85719040ea733"
+      },
+      "examId": {
+        "$oid": "6021448cc3d85719040ea731"
+      }
+    }
+  ],
+  "cqExams": [
+    {
+      "_id": {
+        "$oid": "6015a30c98e7b7af0f4d0f47"
+      },
+      "examId": {
+        "$oid": "6015bade5fb74ddde0a42ad6"
+      }
+    }
+  ],
+  "students": [
+    {
+      "_id": {
+        "$oid": "6015855a946f0c778c691c60"
+      },
+      "student": "6015855a946f0c778c691c60"
+    }
+  ],
+  "__v": 12
+},{
+  "_id": {
+    "$oid": "6015b2c55c6f3bcfe4c0d972"
+  },
+  "creationDate": {
+    "$date": "2021-01-30T19:24:46.134Z"
+  },
+  "name": "C Programming",
+  "code": "SWE123",
+  "department": {
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e93a"
+    },
+    "name": "SWE"
+  },
+  "varsity": {
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e931"
+    },
+    "name": "SUST"
+  },
+  "createdBy": {
+    "$oid": "6015b154a411b8ce8c103c23"
+  },
+  "mcqExams": [],
+  "cqExams": [],
+  "students": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6017d79c9f341b2d5f2893ad"
+  },
+  "creationDate": {
+    "$date": "2021-02-01T10:27:33.100Z"
+  },
+  "name": "Node and Express Tutorial",
+  "code": "SWE300",
+  "department": {
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e93a"
+    },
+    "name": "SWE"
+  },
+  "varsity": {
+    "id": {
+      "$oid": "600c75f1059f3d6697f4e931"
+    },
+    "name": "SUST"
+  },
+  "createdBy": {
+    "$oid": "6015b154a411b8ce8c103c23"
+  },
+  "mcqExams": [],
+  "cqExams": [],
+  "students": [],
+  "__v": 0
+}]
