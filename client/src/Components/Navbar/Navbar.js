@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -18,6 +18,7 @@ import { Button, makeStyles, Snackbar } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import Alert from "@material-ui/lab/Alert";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
+import { UserContext } from "../../UserContext";
 const ENDPOINT = "http://localhost:8080";
 
 let navElements;
@@ -51,6 +52,8 @@ export default function Navigation(props) {
   const [opensnack, setopensnack] = React.useState(false);
 
   const [snackbarMsg, setsnackbarMsg] = useState(false);
+
+  const [xxx, setX] = useContext(UserContext);
 
   const handleSnackClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -100,7 +103,7 @@ export default function Navigation(props) {
           } else if (data.type === `exam`) {
             setopensnack(true);
             setsnackbarMsg(`A new exam  '${data.name}' is set to your course.`);
-            setTimeout(function () {  
+            setTimeout(function () {
               window.location.reload();
             }, 2000);
           } else if (data.type === `result`) {

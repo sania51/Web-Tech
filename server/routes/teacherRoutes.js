@@ -34,7 +34,13 @@ router
 
 router.route("/exam/:id").get(authenticateJWT, teacherController.getExam);
 
+router.route("/exam/:id").delete(authenticateJWT, teacherController.deleteExam);
+
 router.route("/course/:id").get(authenticateJWT, teacherController.getCourse);
+
+router
+  .route("/course/:id")
+  .delete(authenticateJWT, teacherController.deleteCourse);
 
 router
   .route("/exam/mcq/submits/:id")
@@ -48,7 +54,7 @@ router
   .route("/examine/cq/:id")
   .post(authenticateJWT, teacherController.postCqExamine);
 
-  router
+router
   .route("/exams/all/:id")
   .get(authenticateJWT, teacherController.getAllExams);
 

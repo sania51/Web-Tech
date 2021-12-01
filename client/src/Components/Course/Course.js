@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import "./Course.scss";
 import LinearIndeterminate from "../Generic/Loader";
+import { UserContext } from "../../UserContext";
 
 let userdata = localStorage.getItem("data");
 userdata = JSON.parse(userdata);
@@ -12,6 +13,8 @@ export default function Course(props) {
   let { id } = useParams();
 
   const [courseData, setCourseData] = useState(null);
+
+  const [xxx, setX] = useContext(UserContext);
 
   console.log(userdata);
 

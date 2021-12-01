@@ -41,12 +41,13 @@ exports.getStudent = (req, res, next) => {
 
       console.log("Student User Found");
 
-      console.log(student);
+      // console.log(student);
 
       student.courses.forEach(function (course) {
         course.course.cqExams.forEach(function (exam) {
-          console.log("CQ", exam);
-          if (exam.examId.cqQuestions) exam.examId.cqQuestions = undefined;
+          // console.log("CQ", exam);
+          if (exam.examId)
+            if (exam.examId.cqQuestions) exam.examId.cqQuestions = undefined;
         });
 
         course.course.mcqExams.forEach(function (exam) {
@@ -118,7 +119,7 @@ exports.getEditStudent = (req, res, next) => {
         let department;
 
         student.varsity.departments.forEach((dept) => {
-          console.log(dept);
+          // console.log(dept);
           if (dept.id == student.department) {
             department = dept.shortform;
           }
@@ -506,7 +507,7 @@ exports.postCourseAdd = (req, res, next) => {
       "courses.course": req.body.course,
     })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result) {
           errorHandler.validationError(res, 200, "Course Already Added");
         } else {
@@ -526,7 +527,7 @@ exports.postCourseAdd = (req, res, next) => {
                   course
                     .save()
                     .then((result) => {
-                      console.log(result);
+                      // console.log(result);
 
                       data
                         .populate("courses.course")
@@ -569,7 +570,7 @@ exports.getExam = (req, res, next) => {
       else {
         CqExamModel.findById(req.params.id)
           .then((result) => {
-            console.log("CQExam", result);
+            // console.log("CQExam", result);
             apiResponseInJson(res, 200, result);
           })
           .catch((error) => {
@@ -590,7 +591,7 @@ exports.getCourse = (req, res, next) => {
   CourseModel.findById(req.params.id)
     // .populate("students.student.course").exec()
     .then((course) => {
-      console.log(course);
+      // console.log(course);
       if (course) {
         apiResponseInJson(res, 200, course);
       } else errorHandler.validationError(res, 400, "No Course Found");
@@ -609,14 +610,13 @@ exports.postMcqSubmit = (req, res, next) => {
   let wrong = 0;
   let marks = 0;
 
-  if(req.user.role === "Student"){
-
+  if (req.user.role === "Student") {
     OnMcqExamModel.findOne({
       mcqExam: examId,
       student: req.user._id,
     })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result == null) {
           McqExamModel.findById(examId)
             .then((exam) => {
@@ -626,18 +626,19 @@ exports.postMcqSubmit = (req, res, next) => {
                     studentAnswers[i].mcqQuestion ==
                       exam.mcqQuestions[j].mcqQuestionId._id &&
                     studentAnswers[i].studentAnswer ==
-                      exam.mcqQuestions[j].mcqQuestionId.correctAnswers[0].answer
+                      exam.mcqQuestions[j].mcqQuestionId.correctAnswers[0]
+                        .answer
                   ) {
                     solved++;
                     marks += exam.mcqQuestions[j].mcqQuestionId.marks;
                   }
                 }
               }
-  
+
               wrong = studentAnswers.length - solved;
-  
+
               console.log(solved, wrong, marks);
-  
+
               const onMcqExam = new OnMcqExamModel({
                 mcqExam: examId,
                 student: req.user._id,
@@ -651,7 +652,7 @@ exports.postMcqSubmit = (req, res, next) => {
               onMcqExam
                 .save()
                 .then((result) => {
-                  console.log(result);
+                  // console.log(result);
                   apiResponseInJson(res, 200, result);
                 })
                 .catch((error) => {
@@ -674,8 +675,7 @@ exports.postMcqSubmit = (req, res, next) => {
       .catch((error) => {
         console.log(error);
       });
-
-  }else {
+  } else {
     errorHandler.unauthorizedAccess(res);
   }
 };
@@ -684,13 +684,13 @@ exports.postCqSubmit = (req, res, next) => {
   const examId = req.params.id;
   const { studentAnswers, windowChanged, feedback } = req.body;
 
-  if(req.user.role === "Student"){
+  if (req.user.role === "Student") {
     OnCqExamModel.findOne({
       student: req.user._id,
       cqExam: examId,
     })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result == null) {
           const onCqExamModel = new OnCqExamModel({
             cqExam: examId,
@@ -720,7 +720,7 @@ exports.postCqSubmit = (req, res, next) => {
         console.log(error);
         errorHandler.serverError(res);
       });
-  }else {
+  } else {
     errorHandler.unauthorizedAccess(res);
   }
 };
@@ -731,7 +731,7 @@ exports.getMcqSubmit = (req, res, next) => {
     student: req.user._id,
   })
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       if (result) apiResponseInJson(res, 200, result);
       else errorHandler.validationError(res, 400, "No Mcq Exam Found");
     })

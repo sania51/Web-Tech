@@ -7,7 +7,7 @@ let interval;
 const notificationController = (io) => {
   io.on("connection", (socket) => {
     CourseModel.watch().on("change", (data) => {
-      console.log(data);
+      // console.log(data);
       io.emit("notification", data);
     });
   });

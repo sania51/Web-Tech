@@ -348,8 +348,9 @@ exports.getLogin = (req, res, next) => {
                 student.courses.forEach(function (course) {
                   course.course.cqExams.forEach(function (exam) {
                     console.log("CQ", exam);
-                    if (exam.examId.cqQuestions)
-                      exam.examId.cqQuestions = undefined;
+                    if (exam.examId)
+                      if (exam.examId.cqQuestions)
+                        exam.examId.cqQuestions = undefined;
                   });
 
                   course.course.mcqExams.forEach(function (exam) {

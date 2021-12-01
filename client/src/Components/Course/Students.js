@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row, Card, Alert, Table } from "react-bootstrap";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Box, CardContent, MenuList, Typography } from "@material-ui/core";
@@ -15,10 +15,13 @@ import {
   TabContent,
   TabPane,
 } from "react-bootstrap";
+import { UserContext } from "../../UserContext";
 
 const Students = (props) => {
   console.log(props.userInfo);
   console.log(props.courseData);
+
+  const [xxx, setX] = useContext(UserContext);
 
   let x = 1;
   const tableBody = props.courseData.students.map((students) => {

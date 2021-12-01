@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Grid, Snackbar, TextField } from "@material-ui/core";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -22,6 +22,7 @@ import { useHistory } from "react-router-dom";
 import { FaRegCheckCircle } from "react-icons/fa";
 import "./Home.scss";
 import axios from "axios";
+import { UserContext } from "../../UserContext";
 // import Alert from "@material-ui/lab/Alert";
 
 function Alert(props) {
@@ -52,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home(props) {
-  let userdata;
-  userdata = localStorage.getItem("data");
-  userdata = JSON.parse(userdata);
+  let userdata = JSON.parse(localStorage.getItem("data"));
 
   const [open, setOpen] = React.useState(false);
+
+  const [xxx, setX] = useContext(UserContext);
 
   let history = useHistory();
   const [opensnack, setopensnack] = React.useState(false);
@@ -202,97 +203,85 @@ export default function Home(props) {
     }
 
     userdata.courses.forEach((course, i) => {
-      
-
       if (course.course.cqExams) {
         course.course.cqExams.forEach((exam, j) => {
           let date = new Date();
-          console.log(exam.examId.name);
-          console.log(
-            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 60
-          );
-          console.log(date.getTime());
-
-          // console.log(course.course);
-          if (
-            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 1000 <
-            new Date().getTime()
-          )
-            previousExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              courseName: course.course.name,
-              date: new Date(exam.examId.date),
-              totalMarks: exam.examId.totalMarks,
-              totalTime: exam.examId.totalTime,
-              createdBy: course.course.createdBy.firstName
-                ? course.course.createdBy.firstName
-                : "" + " " + course.course.createdBy.lastName
-                ? course.course.createdBy.lastName
-                : "" + " " + course.course.createdBy.username,
-            });
-          else {
-            upcomingExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              courseName: course.course.name,
-              date: new Date(exam.examId.date),
-              totalMarks: exam.examId.totalMarks,
-              totalTime: exam.examId.totalTime,
-              createdBy: course.course.createdBy.firstName
-                ? course.course.createdBy.firstName
-                : "" + " " + course.course.createdBy.lastName
-                ? course.course.createdBy.lastName
-                : "" + " " + course.course.createdBy.username,
-            });
-          }
+          if (exam.examId)
+            if (
+              new Date(exam.examId.date).getTime() +
+                exam.examId.totalTime * 1000 <
+              new Date().getTime()
+            )
+              previousExams.push({
+                _id: exam.examId._id,
+                name: exam.examId.name,
+                courseName: course.course.name,
+                date: new Date(exam.examId.date),
+                totalMarks: exam.examId.totalMarks,
+                totalTime: exam.examId.totalTime,
+                createdBy: course.course.createdBy.firstName
+                  ? course.course.createdBy.firstName
+                  : "" + " " + course.course.createdBy.lastName
+                  ? course.course.createdBy.lastName
+                  : "" + " " + course.course.createdBy.username,
+              });
+            else {
+              upcomingExams.push({
+                _id: exam.examId._id,
+                name: exam.examId.name,
+                courseName: course.course.name,
+                date: new Date(exam.examId.date),
+                totalMarks: exam.examId.totalMarks,
+                totalTime: exam.examId.totalTime,
+                createdBy: course.course.createdBy.firstName
+                  ? course.course.createdBy.firstName
+                  : "" + " " + course.course.createdBy.lastName
+                  ? course.course.createdBy.lastName
+                  : "" + " " + course.course.createdBy.username,
+              });
+            }
         });
       }
 
       if (course.course.mcqExams) {
         course.course.mcqExams.forEach((exam, j) => {
           let date = new Date();
+          console.log(exam);
 
-          console.log(exam.examId.name);
-
-          console.log(
-            new Date(exam.examId.date).getTime() + (exam.examId.totalTime * 60)
-          );
-          console.log(date.getTime());
-
-          
-          if (
-            new Date(exam.examId.date).getTime() + exam.examId.totalTime * 1000 <
-            new Date().getTime()
-          )
-            previousExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              courseName: course.course.name,
-              date: new Date(exam.examId.date),
-              totalMarks: exam.examId.totalMarks,
-              totalTime: exam.examId.totalTime,
-              createdBy: course.course.createdBy.firstName
-                ? course.course.createdBy.firstName
-                : "" + " " + course.course.createdBy.lastName
-                ? course.course.createdBy.lastName
-                : "" + " " + course.course.createdBy.username,
-            });
-          else {
-            upcomingExams.push({
-              _id: exam.examId._id,
-              name: exam.examId.name,
-              courseName: course.course.name,
-              date: new Date(exam.examId.date),
-              totalMarks: exam.examId.totalMarks,
-              totalTime: exam.examId.totalTime,
-              createdBy: course.course.createdBy.firstName
-                ? course.course.createdBy.firstName
-                : "" + " " + course.course.createdBy.lastName
-                ? course.course.createdBy.lastName
-                : "" + " " + course.course.createdBy.username,
-            });
-          }
+          if (exam.examId)
+            if (
+              new Date(exam.examId.date).getTime() +
+                exam.examId.totalTime * 1000 <
+              new Date().getTime()
+            )
+              previousExams.push({
+                _id: exam.examId._id,
+                name: exam.examId.name,
+                courseName: course.course.name,
+                date: new Date(exam.examId.date),
+                totalMarks: exam.examId.totalMarks,
+                totalTime: exam.examId.totalTime,
+                createdBy: course.course.createdBy.firstName
+                  ? course.course.createdBy.firstName
+                  : "" + " " + course.course.createdBy.lastName
+                  ? course.course.createdBy.lastName
+                  : "" + " " + course.course.createdBy.username,
+              });
+            else {
+              upcomingExams.push({
+                _id: exam.examId._id,
+                name: exam.examId.name,
+                courseName: course.course.name,
+                date: new Date(exam.examId.date),
+                totalMarks: exam.examId.totalMarks,
+                totalTime: exam.examId.totalTime,
+                createdBy: course.course.createdBy.firstName
+                  ? course.course.createdBy.firstName
+                  : "" + " " + course.course.createdBy.lastName
+                  ? course.course.createdBy.lastName
+                  : "" + " " + course.course.createdBy.username,
+              });
+            }
         });
       }
     });

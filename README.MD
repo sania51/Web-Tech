@@ -16,7 +16,7 @@ Table
   - [Technogogies](#technogogies)
   - [Source Code](#source-code)
   - [Whole Project SS](#whole-project-ss)
-  - [About Developers](#about-developers)
+  - [About Developer](#about-developers)
 
 
 # Contents
@@ -149,7 +149,6 @@ Our main features are
 ![all-exams](assets/ss/teacher/all-exams.png)
 ![live-exam](assets/ss/live-exam.png)
 
-## About Developers
+## About Developer
 
-- [Sania Sayeda Rahman](https://github.com/sania51)
-- [Mehedi Hasan Shifat](https://github.com/jspw)
+- [Sania Rahman](https://github.com/sania51)

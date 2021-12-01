@@ -19,7 +19,7 @@ router.get(
   (req, res, next) => {
     NotificationModel.find()
       .then((notifications) => {
-        console.log(notifications);
+        // console.log(notifications);
         apiResponseInJson(res, 200, notifications);
       })
       .catch((error) => {

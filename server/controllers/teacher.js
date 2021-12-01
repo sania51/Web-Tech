@@ -523,9 +523,37 @@ exports.postCreateCourse = (req, res, next) => {
   }
 };
 
+exports.deleteCourse = (req, res, next) => {
+  const { id } = req.params;
+
+  if (req.user.role == "Teacher") {
+    CourseModel.findById(id)
+      .then((course) => {
+        if (course.createdBy == req.user._id) {
+          course
+            .remove()
+            .then((course) => {
+              console.log(course);
+              apiResponseInJson(res, 200, course);
+            })
+            .catch((error) => {
+              console.log(error);
+              errorHandler.validationError(res, 401, error);
+            });
+        } else {
+          errorHandler.unauthorizedAccess(res);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        errorHandler.validationError(res, 401, error);
+      });
+  }
+};
+
 exports.postCreateMcqQuestion = (req, res, next) => {
   if (req.user.role == "Teacher") {
-    console.log(req.body);
+    // console.log(req.body);
     const mcqQuestionModel = new McqQuestionModel(req.body);
     mcqQuestionModel
       .save()
@@ -572,7 +600,7 @@ exports.postCreateCqExam = (req, res, next) => {
 
         CourseModel.findById(req.body.course)
           .then((course) => {
-            console.log(course);
+            // console.log(course);
             course.cqExams.push({
               examId: cqExam.id,
             });
@@ -695,27 +723,117 @@ exports.getExam = (req, res, next) => {
     });
 };
 
+exports.deleteExam = (req, res, next) => {
+  if (req.user.role == "Teacher") {
+    McqExamModel.findById(req.params.id)
+      .then((mcqExam) => {
+        if (mcqExam) {
+          CourseModel.findById(mcqExam.course)
+            .then((course) => {
+              course.mcqExams.pull({
+                examId: req.params.id,
+              });
+              course
+                .save()
+                .then((result) => {
+                  // console.log(result);
+                  McqExamModel.findByIdAndDelete(req.params.id)
+                    .then((result) => {
+                      console.log("MCQ Exam Deleted!");
+                      CourseModel.findById(mcqExam.course.id)
+                        .then((course) => {
+                          const updatedMcqExams = course.mcqExams.filter(
+                            (mcq) => {
+                              return mcq.id != mcqExam.id;
+                            }
+                          );
+                          course.mcqExams = updatedMcqExams;
+                          console.log("Updated Course");
+                          console.log(updatedMcqExams);
+                          course
+                            .save()
+                            .then((result) => {
+                              console.log(result);
+                              console.log("mcq exam deleted from course");
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                              errorHandler.serverError(res);
+                            });
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                          errorHandler.serverError(res);
+                        });
+
+                      apiResponseInJson(res, 200, result);
+                    })
+                    .catch((error) => {
+                      errorHandler.serverError(res);
+                    });
+                })
+                .catch((error) => {
+                  console.log("Course save", error);
+                  errorHandler.serverError(res);
+                });
+            })
+            .catch((error) => {
+              errorHandler.serverError(res);
+            });
+        } else {
+          CqExamModel.findById(req.params.id)
+            .then((cqExam) => {
+              CourseModel.findById(cqExam.course)
+                .then((course) => {
+                  course.cqExams.pull({
+                    examId: req.params.id,
+                  });
+                  course
+                    .save()
+                    .then((result) => {
+                      // console.log(result);
+
+                      CqExamModel.findByIdAndDelete(req.params.id)
+
+                        .then((result) => {
+                          console.log("CQ Exam Deleted!");
+                          apiResponseInJson(res, 200, result);
+                        })
+                        .catch((error) => {
+                          errorHandler.serverError(res);
+                        });
+                    })
+                    .catch((error) => {
+                      console.log("Course save", error);
+                      errorHandler.serverError(res);
+                    });
+                })
+                .catch((error) => {
+                  console.log("Course find", error);
+                  errorHandler.serverError(res);
+                });
+            })
+            .catch((error) => {
+              console.log("Course find", error);
+              errorHandler.serverError(res);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log("Course find", error);
+        errorHandler.serverError(res);
+      });
+  } else {
+    errorHandler.unauthorizedAccess(res);
+  }
+};
+
 exports.getCourse = (req, res, next) => {
   CourseModel.findById(req.params.id)
     // .populate("students.student.course").exec()
     .then((course) => {
-      console.log("Course ", course);
+      // console.log("Course ", course);
       if (course) {
-        // course.mcqExams.forEach((exam) => {
-        //   exam.examId.mcqQuestions = undefined;
-        // });
-
-        // course.cqExams.forEach((exam) => {
-        //   exam.examId.cqQuestions = undefined;
-        // });
-
-        // course.createdBy.courses = undefined;
-
-        // course.students.forEach((student) => {
-        //   student.student.varsity = undefined;
-        //   student.student.courses = undefined;
-        // });
-
         apiResponseInJson(res, 200, course);
       } else errorHandler.validationError(res, 400, "No Course Found");
     })
@@ -766,21 +884,17 @@ exports.postCqExamine = (req, res, next) => {
     console.log(req.body);
 
     OnCqExamModel.findById(req.params.id).then((onCqExamModel) => {
-      console.log("onCqExamModel", onCqExamModel);
+      // console.log("onCqExamModel", onCqExamModel);
 
       onCqExamModel.totalMarks = req.body.totalMarks;
       onCqExamModel.examineBy = req.user._id;
-
-      // req.body.marks.forEach((x) => {
-      //   x.cqQuestion = mongoose.Types.ObjectId(x.cqQuestion);
-      // });
 
       onCqExamModel.marks = req.body.marks;
 
       onCqExamModel
         .save()
         .then((result) => {
-          console.log("OnCQ", result.cqExam.course.varsity.name);
+          // console.log("OnCQ", result.cqExam.course.varsity.name);
 
           const varsity = result.cqExam.course.varsity.name;
 
@@ -821,12 +935,8 @@ exports.getAllExams = (req, res, next) => {
         course: req.params.id,
       })
         .then((cqExams) => {
-          console.log(mcqExams);
-          console.log(cqExams);
-
-          // if(req.user.role === "Student"){
-          //   mcqExams.
-          // }
+          // console.log(mcqExams);
+          // console.log(cqExams);
 
           const result = {
             mcqExams: mcqExams,

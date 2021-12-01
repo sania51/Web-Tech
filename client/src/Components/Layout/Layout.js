@@ -1,22 +1,18 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Col,
-  Container,
-  Row,
-  Modal,
-  Form,
-} from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Col, Container, Row, Modal, Form } from "react-bootstrap";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import { UserContext } from "../../UserContext";
 
 const Layout = (props) => {
   const [showModal, setShowModal] = useState(true);
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+
+  const [xxx, setX] = useContext(UserContext);
 
   const SelectForm = () => {
     let items = [];

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import {
   Button,
@@ -19,6 +19,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,8 @@ export default function Exam(props) {
 
   // console.log("Exam id",match);
   console.log("props... ", props);
+
+  const [xxx, setX] = useContext(UserContext);
 
   let { id } = useParams();
   console.log("ID", id);

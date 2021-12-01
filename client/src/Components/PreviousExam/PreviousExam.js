@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   Button,
@@ -33,6 +33,7 @@ import { Box, CardContent, MenuList, Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 
 import ExamInfo from "./ExamInfo";
+import { UserContext } from "../../UserContext";
 
 const PreviousExam = (props) => {
   var months = [
@@ -64,6 +65,8 @@ const PreviousExam = (props) => {
   let userdata;
   userdata = localStorage.getItem("data");
   userdata = JSON.parse(userdata);
+
+  const [xxx, setX] = useContext(UserContext);
 
   let role;
 
@@ -409,7 +412,13 @@ const PreviousExam = (props) => {
                     <tr>
                       <td>Examined By</td>
                       <td>
-                        {mcqExamData ? "Automatic" : cqExamData.examineBy.firstName ? cqExamData.examineBy.firstName : '' + cqExamData.examineBy.lastName ? cqExamData.examineBy.lastName : '' + cqExamData.examineBy.username }
+                        {mcqExamData
+                          ? "Automatic"
+                          : cqExamData.examineBy.firstName
+                          ? cqExamData.examineBy.firstName
+                          : "" + cqExamData.examineBy.lastName
+                          ? cqExamData.examineBy.lastName
+                          : "" + cqExamData.examineBy.username}
                       </td>
                     </tr>
                   </tbody>

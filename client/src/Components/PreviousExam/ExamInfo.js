@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row, Card, Alert, Table } from "react-bootstrap";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Box, CardContent, MenuList, Typography } from "@material-ui/core";
@@ -17,6 +17,7 @@ import {
 } from "react-bootstrap";
 
 import "./PreviousExam.css";
+import { UserContext } from "../../UserContext";
 
 const ExamInfo = (props) => {
   var months = [
@@ -49,10 +50,7 @@ const ExamInfo = (props) => {
   const onlyExamInfo = props.onlyExamInfo;
   let mcq;
   let cq;
-
-  console.log("mcqExamData", mcqExamData);
-  console.log("cqExamData", cqExamData);
-  console.log("onlyExamInfo", onlyExamInfo);
+  const [xxx, setX] = useContext(UserContext);
 
   if (mcqExamData) {
     mcq = mcqExamData.mcqExam.mcqQuestions.map((questions) => {

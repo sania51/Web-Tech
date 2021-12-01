@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { IoCreate } from "react-icons/io5";
@@ -9,21 +9,20 @@ import { FaUsers } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 import "./Sidebar.scss";
 import ExamType from "./CreateExam/ExamType";
-import Students from './Students';
+import Students from "./Students";
 import Exams from "./Exams";
 import Teacher from "./Teacher";
 import Info from "./Info";
+import { UserContext } from "../../UserContext";
 
 export default function Sidebar(props) {
-
-
+  const [xxx, setX] = useContext(UserContext);
 
   let userdata;
   userdata = localStorage.getItem("data");
   userdata = JSON.parse(userdata);
 
   console.log(props.courseData);
-
 
   let displayContent;
 
@@ -60,7 +59,7 @@ export default function Sidebar(props) {
         courseData={props.courseData}
       />
     );
-  else if(content === "teacher") {
+  else if (content === "teacher") {
     displayContent = (
       <Teacher
         className="content"
@@ -68,8 +67,7 @@ export default function Sidebar(props) {
         courseData={props.courseData}
       />
     );
-  }
-  else if(content === "info") {
+  } else if (content === "info") {
     displayContent = (
       <Info
         className="content"

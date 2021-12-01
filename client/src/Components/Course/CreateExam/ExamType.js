@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -8,10 +8,13 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import CreateExam from "./CreateExam";
 import "./CreateExam.scss";
+import { UserContext } from "../../../UserContext";
 
 const ExamType = (props) => {
   const [examType, setexamType] = useState("");
   const [create, setcreate] = useState(false);
+
+  const [xxx, setX] = useContext(UserContext);
 
   const handleChange = (event) => {
     setexamType(event.target.value);

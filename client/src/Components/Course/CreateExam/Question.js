@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -23,6 +23,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import { Toast } from "react-bootstrap";
 import "./CreateExam.scss";
+import { UserContext } from "../../../UserContext";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -57,6 +58,8 @@ export default function Question(props) {
 
   let questionsCreated = 0;
 
+  const [xxx, setX] = useContext(UserContext);
+
   const [values, setValues] = useState({
     description: "",
     question: null,
@@ -80,7 +83,7 @@ export default function Question(props) {
   console.log("questionEditDisable", questionEditDisable);
 
   const handleLockExamClickOpen = () => {
-    console.log(props.totalMarks,props.totalTime)
+    console.log(props.totalMarks, props.totalTime);
     if (
       (values.question &&
         values.optA &&
@@ -104,7 +107,7 @@ export default function Question(props) {
   };
 
   const createExam = () => {
-    console.log(props.totalMarks,props.totalTime)
+    console.log(props.totalMarks, props.totalTime);
     console.log(values.name);
     if (values.name) {
       props.createExam(values.date, values.name);

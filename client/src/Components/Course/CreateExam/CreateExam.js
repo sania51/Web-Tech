@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "antd/dist/antd.css";
 import { Tabs } from "antd";
 import axios from "axios";
@@ -6,6 +6,7 @@ import { Toast } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Question from "./Question";
 import "./CreateExam.scss";
+import { UserContext } from "../../../UserContext";
 
 const { TabPane } = Tabs;
 
@@ -30,7 +31,7 @@ export default class CreateCourse extends React.Component {
     console.log("Mark !", marks);
     console.log("Time!", time);
 
-    this.totalMarks += marks
+    this.totalMarks += marks;
     this.totalTime += time;
 
     if (this.props.examType === "CQ")
@@ -47,9 +48,6 @@ export default class CreateCourse extends React.Component {
   };
 
   createExam = (date, examName) => {
-    console.log("Date ", date);
-    console.log("Name ", examName);
-
     let data;
 
     if (this.props.examType === "CQ")
@@ -86,6 +84,7 @@ export default class CreateCourse extends React.Component {
             showToast: true,
             examCreateMessage: "Exam Created Successfully",
           });
+          window.location.reload();
         } else
           this.setState({
             showToast: true,

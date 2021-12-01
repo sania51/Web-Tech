@@ -39,36 +39,17 @@ mongoose
       origin: ["*"],
     });
 
-    // var clients = 0;
+    io.on("connection", (socket) => {
+      app.set("socketIO", io);
 
-    // examController(io);
-    // notificationController(io);
-
-
-      io.on("connection", (socket) => {
-        console.log("New client Connected!");
-        // const ip = socket.handshake.headers || socket.conn.remoteAddress;
-        // console.log(ip);
-
-        // console.log("Socket ID : ", socket.id);
-        // console.log("Clients connected : ", clients);
-
-        // app.use((req, res, next) => {
-        //   req.socket = socket;
-        //   next();
-        // });
-
-        app.set("socketIO",io);
-
-        socket.on("disconnect", (reason) => {
-          console.log("Client Disconnected!");
-          console.log("Reason", reason);
-        });
+      socket.on("disconnect", (reason) => {
+        console.log("Client Disconnected!");
+        console.log("Reason", reason);
       });
+    });
 
     server.listen(PORT, () => {
       console.log(`Server is listening at localhost:${PORT}`);
-
     });
 
     // Handle Unhandled Rejections

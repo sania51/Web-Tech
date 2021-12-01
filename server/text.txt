@@ -1,0 +1,13 @@
+
+
+
+department -> 
+
+student -> department,name,role
+
+course -> student,name,code
+
+            12,sdasdas,101
+
+2 ->        
+    

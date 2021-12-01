@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "react-bootstrap";
 
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
 import MuiAlert from "@material-ui/lab/Alert";
+import { UserContext } from "../../UserContext";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -15,6 +16,8 @@ const MarkSheet = (props) => {
 
   let tableBody;
   let x = 1;
+
+  const [xxx, setX] = useContext(UserContext);
 
   const saveMarksheet = () => {
     html2canvas(document.querySelector("#resulttable")).then((canvas) => {

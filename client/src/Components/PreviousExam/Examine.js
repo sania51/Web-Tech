@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Col, Container, Row, Form, Card, Table } from "react-bootstrap";
 
@@ -15,6 +15,7 @@ import LinearIndeterminate from "../Generic/Loader";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Box, Button, CardContent, Grid, Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 const Examine = (props) => {
   var months = [
@@ -50,6 +51,8 @@ const Examine = (props) => {
   const [cqExamsData, setCqExamsData] = useState(null);
 
   const [onlyExamInfo, setOnlyExamInfo] = useState(null);
+
+  const [xxx, setX] = useContext(UserContext);
 
   const [examined, setExamined] = useState(false);
 
