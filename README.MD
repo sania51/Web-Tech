@@ -16,7 +16,7 @@ Table
   - [Technogogies](#technogogies)
   - [Source Code](#source-code)
   - [Whole Project SS](#whole-project-ss)
-  - [About Developer](#about-developers)
+  - [About Developer](#about-developer)
 
 
 # Contents
